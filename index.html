@@ -11,7 +11,7 @@
 --metal:linear-gradient(120deg,#C9C1A6,#FBF6E6 45%,#BDB59B);--num:"Maitree","Niramit",serif;--serif:"Cormorant Garamond","Maitree",serif;color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
-body{margin:0;color:#DCE0F2;font:400 18px/1.85 "Niramit",system-ui,sans-serif;background:radial-gradient(1200px 700px at 85% -5%,#1B2E7A55,transparent 60%),radial-gradient(900px 600px at 0% 45%,#2A3F9A33,transparent 60%),var(--navy);background-attachment:fixed;overflow-x:hidden}
+body{margin:0;color:#DCE0F2;font:400 18px/1.85 "Niramit",system-ui,sans-serif;background:radial-gradient(1200px 700px at 85% -5%,#1B2E7A55,transparent 60%),radial-gradient(900px 600px at 0% 45%,#2A3F9A33,transparent 60%),var(--navy);background-attachment:fixed;overflow-x:hidden;padding-top:env(safe-area-inset-top,0px)}
 h1,h2,h3{font-family:var(--serif);margin:0;line-height:1.3;color:var(--pale)}
 a{color:inherit}
 a:focus-visible,button:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--silver);outline-offset:3px}
@@ -98,6 +98,9 @@ section h2::after{content:"";display:block;width:70px;height:5px;border-radius:5
 .news time{display:grid;place-items:center;width:88px;height:64px;border-radius:20px;background:#0F1B48;color:var(--pale);font:600 1.1rem var(--num);text-align:center;line-height:1.3}
 .news strong{display:block;font:700 1.15rem "Maitree",serif;color:#0F1B48}
 .news span{color:#59627F}
+.news li.more{display:none}
+.news.open li.more{display:grid;animation:pop .7s both}
+.news-btn{text-align:center;margin:14px 0 8px}
 .ph{position:relative;overflow:hidden;display:grid;place-items:center;padding:8px;text-align:center;border-radius:26px;background:var(--glass);border:1px solid rgba(217,210,192,.3);color:#8E97BC;font-size:.85rem}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s;cursor:zoom-in}
 .ph:hover img{transform:scale(1.1)}
@@ -135,7 +138,7 @@ footer .social{margin-top:0;animation:none}
 <div id="bar"></div><div id="glow"></div>
 <div id="bg" aria-hidden="true"><i class="au a1"></i><i class="au a2"></i><i class="au a3"></i><div id="stars"></div><div id="rays"></div><div id="orbs"></div></div>
 <nav id="nav">
-<b><img src="images/logo.jpg" alt="">สภานักเรียน</b>
+<b><img src="images/logo.jpg" alt="" onerror="this.style.display='none'">สภานักเรียน</b>
 <a href="#about">เกี่ยวกับเรา</a><a href="#team">คณะกรรมการ</a><a href="#news">กิจกรรม</a><a href="#gallery">แกลเลอรี</a><a href="#voice">ส่งเสียงถึงสภา</a>
 </nav>
 
@@ -195,11 +198,17 @@ footer .social{margin-top:0;animation:none}
 <section id="news"><div class="wrap">
 <h2>กิจกรรมและประกาศ</h2>
 <p class="lead">ข่าวล่าสุดจากสภานักเรียน (ตัวอย่าง)</p>
-<div class="panel"><ul class="news">
+<div class="panel">
+<ul class="news" id="newsList">
 <li><time>15<br>ต.ค.</time><div><strong>รับสมัครอาสาสมัครกีฬาสี</strong><span>ลงชื่อได้ที่ห้องสภานักเรียน ทุกวันพักเที่ยง</span></div></li>
 <li><time>28<br>ต.ค.</time><div><strong>ประชุมสภาประจำเดือน</strong><span>ตัวแทนห้องเรียนนำเรื่องที่อยากเสนอมาพูดคุย</span></div></li>
 <li><time>10<br>พ.ย.</time><div><strong>โครงการโรงเรียนสะอาด</strong><span>ชวนทุกห้องร่วมกันดูแลพื้นที่ส่วนกลาง</span></div></li>
-</ul></div>
+<li class="more"><time>18<br>พ.ย.</time><div><strong>กีฬาสีประจำปี</strong><span>ร่วมเชียร์และแข่งขันกับเพื่อนๆ ทุกสี ที่สนามกีฬาโรงเรียน</span></div></li>
+<li class="more"><time>25<br>พ.ย.</time><div><strong>ตลาดนัดนักเรียน</strong><span>เปิดพื้นที่ให้นักเรียนนำสินค้าและผลงานมาจำหน่าย</span></div></li>
+<li class="more"><time>5<br>ธ.ค.</time><div><strong>กิจกรรมจิตอาสาพัฒนาชุมชน</strong><span>ร่วมกันทำความดีเพื่อชุมชนรอบโรงเรียน ลงชื่อได้ที่สภานักเรียน</span></div></li>
+</ul>
+<p class="news-btn"><button class="btn" id="newsMore" type="button" aria-expanded="false">ดูเพิ่มเติม</button></p>
+</div>
 </div></section>
 
 <section id="gallery"><div class="wrap">
@@ -230,8 +239,8 @@ footer .social{margin-top:0;animation:none}
 </div></section>
 
 <footer><div class="wrap">
-<div class="brand"><img src="images/12671.jpg" alt=""><div><h3 style="margin:0">สภานักเรียน</h3><p>EQUALITY</p></div></div>
-<div><h3>ติดต่อ</h3><p>ห้องสภานักเรียน ไม่รู้ครับยังไม่ได้เป็น<br>tes31581@gmail.com</p></div>
+<div class="brand"><img src="images/12671.jpg" alt="" onerror="this.style.display='none'"><div><h3 style="margin:0">สภานักเรียน</h3><p>EQUALITY</p></div></div>
+<div><h3>ติดต่อ</h3><p>ห้องสภานักเรียน ชั้น 1 อาคารเรียน<br>studentcouncil@school.example</p></div>
 <div><h3>ติดตามเรา</h3>
 <div class="social">
 <a href="https://www.facebook.com/ใส่ชื่อเพจ" target="_blank" rel="noopener">Facebook</a>
@@ -245,8 +254,15 @@ footer .social{margin-top:0;animation:none}
 
 <script>
 var still=matchMedia('(prefers-reduced-motion:reduce)').matches,$=function(s){return document.querySelector(s)},$$=function(s){return [].slice.call(document.querySelectorAll(s))};
-/* ฟอร์ม "ส่งเสียงถึงสภา" ส่งข้อมูลจริงไปที่ Formspree และแจ้งเตือนเข้า Discord */
+/* ฟอร์ม "ส่งเสียงถึงสภา" ส่งข้อมูลจริงไปที่ Formspree และแจ้งเตือนเข้า Discord
+   ⚠ ใส่ Webhook URL อันใหม่ของคุณตรงนี้ (อันเก่าควรลบทิ้งใน Discord แล้วสร้างใหม่) */
 var DISCORD_WEBHOOK='https://discordapp.com/api/webhooks/1554866586102267924/kruPXyqw09CiBBC7Corz8llq9RsxxMnF7dqkWStui3Rt0PoCCCFUYGQigKrNRk_oKB6K';
+var TYPE_STYLE={
+'ข้อเสนอแนะ':{c:0x5B7CFF,e:'💡'},
+'ปัญหาที่พบ':{c:0xFF6B6B,e:'⚠️'},
+'ไอเดียกิจกรรม':{c:0x4ADE80,e:'🎉'},
+'ขอเพลง':{c:0xC084FC,e:'🎵'}
+};
 $('#voiceForm').addEventListener('submit',function(e){
 e.preventDefault();
 var form=e.target,m=$('#m'),t=$('#t'),ok=$('#ok'),btn=$('#go');
@@ -254,13 +270,32 @@ ok.style.display='block';
 if(!m.value.trim()){ok.textContent='กรุณาเขียนรายละเอียดก่อนส่ง';return}
 btn.disabled=true;btn.textContent='กำลังส่ง...';
 var toFormspree=fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-var toDiscord=fetch(DISCORD_WEBHOOK,{
+
+/* ---- แจ้งเตือน Discord แบบ Embed สวยๆ เว้นวรรคอ่านง่าย ---- */
+var st=TYPE_STYLE[t.value]||{c:0xD9D2C0,e:'📮'};
+/* ใส่ > หน้าทุกบรรทัดให้เป็นกรอบอ้างอิง และตัดไม่ให้เกินลิมิตของ Discord (1024 ตัวอักษรต่อช่อง) */
+var quoted=m.value.trim().split('\n').map(function(l){return '> '+l}).join('\n');
+if(quoted.length>950){quoted=quoted.slice(0,947)+'…'}
+var toDiscord=(DISCORD_WEBHOOK.indexOf('https://')===0)?fetch(DISCORD_WEBHOOK,{
 method:'POST',
 headers:{'Content-Type':'application/json'},
 body:JSON.stringify({
-content:'📮 **มีข้อความใหม่จากเว็บสภานักเรียน**\n**หัวข้อ:** '+t.value+'\n**รายละเอียด:** '+m.value
+username:'กล่องข้อความสภานักเรียน',
+allowed_mentions:{parse:[]},
+embeds:[{
+title:'📮  มีข้อความใหม่ถึงสภา',
+description:'━━━━━━━━━━━━━━━━━━━━\n\u200b',
+color:st.c,
+fields:[
+{name:st.e+'  หัวข้อ',value:'**'+t.value+'**\n\u200b',inline:false},
+{name:'💬  รายละเอียด',value:quoted+'\n\u200b',inline:false}
+],
+footer:{text:'ส่งจากเว็บไซต์สภานักเรียน'},
+timestamp:new Date().toISOString()
+}]
 })
-}).catch(function(){/* ไม่ให้ error ของ Discord ทำให้ทั้งฟอร์มล้มเหลว */});
+}).catch(function(){/* ไม่ให้ error ของ Discord ทำให้ทั้งฟอร์มล้มเหลว */}):Promise.resolve();
+
 Promise.all([toFormspree,toDiscord])
 .then(function(results){
 var res=results[0];
@@ -293,9 +328,9 @@ $$('.rv').forEach(function(e){io.observe(e)});
 $$('.card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')})});
 /* hero crest tilt + cursor glow */
 if(!still&&matchMedia('(pointer:fine)').matches){
-var t=$('.tilt'),g=$('#glow');
+var tl=$('.tilt'),g=$('#glow');
 addEventListener('mousemove',function(e){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';
-var x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);t.style.setProperty('--ry',(x*16)+'deg');t.style.setProperty('--rx',(-y*16)+'deg')});
+var x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);tl.style.setProperty('--ry',(x*16)+'deg');tl.style.setProperty('--rx',(-y*16)+'deg')});
 }
 /* background orbs */
 if(!still){var ob=$('#orbs'),N=innerWidth<700?8:16;
@@ -306,6 +341,7 @@ ob.appendChild(o)}}
 var lb=$('#lb');$$('.gallery img').forEach(function(i){i.addEventListener('click',function(){lb.querySelector('img').src=i.src;lb.classList.add('show')})});
 $('#more').onclick=function(){var g=$('.gallery'),o=g.classList.toggle('open');this.textContent=o?'ดูน้อยลง':'ดูเพิ่มเติม';this.setAttribute('aria-expanded',o)};
 $('#teamMore').onclick=function(){var g=$('.team-grid'),o=g.classList.toggle('open');this.textContent=o?'ดูน้อยลง':'ดูเพิ่มเติม';this.setAttribute('aria-expanded',o)};
+$('#newsMore').onclick=function(){var g=$('#newsList'),o=g.classList.toggle('open');this.textContent=o?'ดูน้อยลง':'ดูเพิ่มเติม';this.setAttribute('aria-expanded',o)};
 lb.onclick=function(){lb.classList.remove('show')};addEventListener('keydown',function(e){if(e.key=='Escape')lb.classList.remove('show')});
 </script>
 </body>
